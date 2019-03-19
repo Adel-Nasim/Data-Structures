@@ -1,0 +1,65 @@
+#include <iostream>
+#include <stack>
+#include <string>
+using namespace std;
+string infix2postfix(const string exp)
+{
+	stack<char>my_stack;
+	string postExp;
+	char ch;
+	char ch2;
+	for (unsigned int i = 0; i < exp.size(); i++)
+	{
+		ch = exp[i];
+		if (ch == '(')
+			my_stack.push(ch);
+		else if (ch == ')')
+		{
+			ch2 = my_stack.top();
+			while (ch2 != '(')
+			{
+				postExp.push_back(my_stack.top());
+				my_stack.pop();
+				ch2 = my_stack.top();
+			}
+			my_stack.pop();
+		}
+		else if ((ch == '+') || (ch == '-') || (ch == '*') || (ch == '/'))
+		{
+			if (my_stack.empty())
+				my_stack.push(ch);
+			else
+			{
+				ch2 = my_stack.top();
+				while (((ch2 == '*') || (ch2 == '/') || (ch2 == '+') || (ch2 == '-')) && ((ch == '+') || (ch == '-')))
+				{
+					postExp.push_back(my_stack.top());
+					my_stack.pop();
+					if (my_stack.empty())
+						break;
+					ch2 = my_stack.top();
+
+				}
+				my_stack.push(ch);
+			}
+		}
+		else postExp.push_back(ch);
+	}
+	if (!my_stack.empty())
+	{
+		while (1)
+		{
+			postExp.push_back(my_stack.top());
+			my_stack.pop();
+			if (my_stack.empty())
+				break;
+		}
+	}
+	return postExp;
+}
+int main()
+{
+
+	cout << infix2postfix("(5+7)*8+5");
+	return 0;
+}
