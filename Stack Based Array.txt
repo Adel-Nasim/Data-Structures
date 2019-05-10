@@ -1,20 +1,20 @@
 #include<iostream>
 using namespace std;
-const int MAX_SIZE = 100;
+const int MAX_SIZE = 3;
 template<class t>
 class stack {
 	int top;
 	t item[MAX_SIZE];
 public:
-	stack():top(-1) {}
-	bool isEmpty() 
+	stack() :top(-1) {}
+	bool isEmpty()
 	{
 		return top < 0;
 	}
 
 	void push(t Element)
 	{
-		if (top >= MAX_SIZE)
+		if (top >= MAX_SIZE-1)
 		{
 			cout << "Stack full on push";
 		}
@@ -24,7 +24,7 @@ public:
 			item[top] = Element;
 		}
 	}
-	void pop() 
+	void pop()
 	{
 		if (isEmpty())
 			cout << "stack empty on pop";
@@ -57,7 +57,7 @@ public:
 		}
 		cout << "]";
 		cout << endl;
-	
+
 	}
 };
 int main() {
