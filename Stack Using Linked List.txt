@@ -1,82 +1,79 @@
-#include<iostream>
+#include <iostream>
 using namespace std;
-template<class t>
-class Stack {
-private:
-	struct StackNode
-	{
-		t item;
-		StackNode*next;
-	};
-	StackNode *topPtr, *curPtr;
-public:
-	Stack() {
-		topPtr = NULL;
-	}
-	bool isEmpty()
-	{
-		return topPtr == NULL;
-	}
-	void push(t newItem)
-	{
-		StackNode *newPtr = new StackNode;
-		if (newPtr == NULL)
-			cout << "Stack push cannot allocate memory";
-		else
-		{
-			newPtr->item = newItem;
-			newPtr->next = topPtr;
-			topPtr = newPtr;
-		}
-	}
-	void pop() {
-		if (isEmpty())
-			cout << "Stack empty on pop";
-		else {
-			StackNode *temp = topPtr;
-			topPtr = topPtr->next;
-			temp->next = NULL;
-			delete temp;
-		}
-	}
-	void pop(t stackTop)
-	{
-		if (isEmpty())
-			cout << "Stack empty on pop";
-		else {
-			stackTop = topPtr->item;
-			StackNode *temp = topPtr;
-			topPtr = topPtr->next;
-			temp->next = NULL;
-			delete temp;
-		}
-	}
-	void getTop(t stackTop)
-	{
-		if (isEmpty())
-			cout << "stack empty on getTop";
-		else
-		stackTop = topPtr->item;
-		cout << "\nTop Element of the stack is " << stackTop;
-		cout << endl;
-	}
-	void display()
-	{
-		curPtr = topPtr;
-		cout << "\nItems in the stack : ";
-		cout << "[ ";
-		while (curPtr != NULL)
-		{
-			cout <<curPtr->item;
-			curPtr = curPtr->next;
-		}
-		cout << " ]\n";
-	}
-};
-int main()
-{
-	Stack<int>s;
-	s.push(10);
-	s.display();
-}
+template <class t> 
 
+class stack {
+  private:
+  struct node{
+   t item;
+   node* next = NULL;
+  };
+  node* top, curr ;
+public:
+ stack(){
+     node* top = NULL;
+ }
+ bool ISEMPTY(void)
+ {
+     return top == NULL;
+ }
+ 
+ 
+ void push (t element)
+ {  
+     node* nodeptr= new node;
+     if(nodeptr == NULL) cout <<"stack full on push";
+     else 
+     {
+        nodeptr->item = element;
+        nodeptr-> next = top;
+        top = nodeptr;
+     }
+ }
+ void pop (t & element)
+ {   
+     element = top->item;
+     node* curr = new node;
+     curr = top;
+     top  = top->next;
+     curr->next = NULL;
+     delete curr;
+     
+ }
+ 
+ void getTop(t &element)
+ {   
+     if(top == NULL ) cout <<"stack empty on get top";
+     element = top->item;
+ }
+ void print(void)
+ {
+     node* curr = top;
+     cout << "[";
+     cout << endl;
+     while(curr!= NULL)
+     {   
+
+         cout << curr->item <<endl;
+         curr= curr->next;
+     }
+        cout <<"]";
+        cout <<endl;
+ }
+ 
+ 
+};
+
+
+int main() {
+    stack <int> s ;
+    int item ;
+    s.push(5);
+    s.push(10);
+    s.push(20);
+    s.print();
+    s.pop(item);
+    cout<<endl;
+    s.print();
+    return 0;
+}
