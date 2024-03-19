@@ -202,6 +202,7 @@ int main()
     arrayListType lst2(lst1);
     
     lst2.print();
+cout << "Hello, world\n";
 
 	return 0;
 }
